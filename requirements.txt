@@ -1,0 +1,13 @@
+pandas
+Scikit-learn
+uvicorn
+fastapi
+python-jose
+python-multipart
+PyPDF2 
+shap
+matplotlib
+numpy
+pdfplumber
+firebase_admin
+python-dotenv
