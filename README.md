@@ -15,8 +15,6 @@ A full-stack web application for predicting diabetes using machine learning mode
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
 - [Model Training](#model-training)
-- [Contributing](#contributing)
-- [License](#license)
 
 ---
 
@@ -146,9 +144,5 @@ cd model_training
 python run_train_pipeline.py
 ```
 Trained models are saved in the `saved_models/` directory.
-
----
-
-
 
 ---
