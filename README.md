@@ -1,6 +1,3 @@
-# Diabetes-Prediction
-
-
 # Diabetes Prediction Web Application
 
 A full-stack web application for predicting diabetes using machine learning models. The project allows users to upload medical reports, extract patient data, make predictions using trained models, and view their prediction history.
@@ -133,4 +130,29 @@ docker-compose up --build
 
 | Endpoint                        | Method | Description                              |
 |----------------------------------|--------|------------------------------------------|
-| `/auth/login`                   | POST
+| `/auth/login`                   | POST   | User login                               |
+| `/auth/register`                | POST   | User registration                        |
+| `/api/extract-data`             | POST   | Extract patient data from uploaded PDF    |
+| `/classical/predict`            | POST   | Predict using classical ML model          |
+| `/neural/predict`               | POST   | Predict using neural network model        |
+| `/classical/get-patient-data`   | GET    | Get user's prediction history             |
+
+---
+
+## Model Training
+
+To retrain or update the models:
+
+```sh
+cd model_training
+python run_train_pipeline.py
+```
+Trained models are saved in the `saved_models/` directory.
+
+---
+
+## Contributing
+
+Contributions are welcome! Please open issues or submit pull requests for improvements or bug fixes.
+
+---
