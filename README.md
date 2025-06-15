@@ -43,16 +43,10 @@ backend/
     Dockerfile
     main.py
     api/
-        routes.py
     auth/
-        auth.py
     db/
-        firebase.py
     models/
-        schemas.py
     services/
-        user.py
-        utils.py
 frontend/
     dashboard.html
     Dockerfile
@@ -60,9 +54,7 @@ frontend/
     index.html
     assets/
         css/
-          style.css
         js/
-          script.js
 model_training/
     run_train_pipeline.py
     data/
