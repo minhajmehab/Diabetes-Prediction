@@ -71,9 +71,8 @@ saved_models/
 
 ### Prerequisites
 
-- Python 3.12+
+- Python 3.12
 - Docker (recommended)
-- Node.js (optional, for frontend development)
 
 ### Installation
 
@@ -150,8 +149,6 @@ Trained models are saved in the `saved_models/` directory.
 
 ---
 
-## Contributing
 
-Contributions are welcome! Please open issues or submit pull requests for improvements or bug fixes.
 
 ---
