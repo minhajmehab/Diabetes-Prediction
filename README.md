@@ -146,3 +146,22 @@ python run_train_pipeline.py
 Trained models are saved in the `saved_models/` directory.
 
 ---
+
+## Why Random Forest Was Chosen for Diabetes Type Prediction
+
+- **Handles Complex Relationships:**  
+  Diabetes datasets often contain non-linear interactions between features (e.g., glucose levels, BMI, insulin resistance). Random Forest excels at capturing these intricate patterns without assuming linearity, making it ideal for medical data where multiple factors interact unpredictably.
+
+- **Robustness to Noise and Outliers:**  
+  Medical data (like Kaggle's diabetes datasets) frequently include measurement errors or outliers. Random Forest’s ensemble approach (averaging predictions from many decision trees) reduces overfitting and minimizes the impact of noisy data, ensuring more reliable predictions.
+
+- **Automatic Feature Importance:**  
+  The model provides intrinsic feature importance scores, revealing which factors (e.g., glucose levels, age, BMI) most influence diabetes type prediction. This aids in interpreting results clinically—critical for healthcare applications.
+
+- **Handles High-Dimensional Data Efficiently:**  
+  Even with numerous features (e.g., pregnancies, blood pressure, skin thickness), Random Forest maintains accuracy by selecting random subsets of features for each tree, preventing dominance by irrelevant variables.
+
+- **Requires Minimal Preprocessing:**  
+  Unlike models sensitive to feature scaling (e.g., SVM, logistic regression), Random Forest works well with raw or unscaled data, reducing preprocessing steps and potential information loss.
+
+---
