@@ -49,13 +49,20 @@ backend/
     db/
         firebase.py
     models/
+        schemas.py
     services/
+        user.py
+        utils.py
 frontend/
     dashboard.html
     Dockerfile
     history.html
     index.html
     assets/
+        css/
+          style.css
+        js/
+          script.js
 model_training/
     run_train_pipeline.py
     data/
@@ -84,8 +91,9 @@ saved_models/
     cd diabetes-prediction
     ```
 
-2. **Set up environment variables**
-    - Copy `.env.example` to `.env` and fill in the required values.
+2. **Set up Firebase credentials**
+    - Obtain your Firebase service account JSON file from the Firebase Console.
+    - Save it as `firebase_cred.json` in the project root
 
 3. **Install dependencies**
     ```sh
@@ -134,7 +142,6 @@ docker-compose up --build
 | `/auth/register`                | POST   | User registration                        |
 | `/api/extract-data`             | POST   | Extract patient data from uploaded PDF    |
 | `/classical/predict`            | POST   | Predict using classical ML model          |
-| `/neural/predict`               | POST   | Predict using neural network model        |
 | `/classical/get-patient-data`   | GET    | Get user's prediction history             |
 
 ---
