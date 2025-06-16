@@ -1,20 +1,24 @@
 import logging
 from datetime import datetime, timedelta
+import os
 
 from fastapi import HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
+from dotenv import load_dotenv
 
 from services.users import get_user
+
+load_dotenv()
 
 # ------------------ Logging Setup ------------------
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
 # ------------------ Auth Config ------------------
-SECRET_KEY = "your-secret-key"  # Change in production or load from env
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 

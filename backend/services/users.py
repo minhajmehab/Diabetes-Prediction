@@ -1,4 +1,5 @@
 import logging
+import json
 
 # ------------------ Logging Setup ------------------
 logger = logging.getLogger(__name__)
@@ -6,12 +7,8 @@ logging.basicConfig(level=logging.INFO)
 
 # ------------------ Fake In-Memory User Database ------------------
 # TODO: Replace with actual hashed-password database in production
-fake_users_db = {
-    "testuser": {
-        "username": "testuser",
-        "password": "testpass",  # WARNING: Do not store plaintext passwords in production!
-    }
-}
+with open("users.json") as f:
+    fake_users_db = json.load(f)
 
 
 def get_user(username: str) -> dict | None:
