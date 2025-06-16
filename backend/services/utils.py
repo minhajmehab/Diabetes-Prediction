@@ -1,6 +1,7 @@
 import logging
 import re
 from typing import Any, Dict, Optional, Tuple
+import shap
 
 import joblib
 import matplotlib.pyplot as plt  # Unused, remove if not needed
@@ -126,23 +127,30 @@ def predict(model: Any, X: pd.DataFrame) -> Tuple[pd.Series, Dict[str, float], f
 
     pred_score = model.predict_proba(X)[0][pred_int]
 
-
     top_factors = {}
-    prediction_percent = 0.0
 
     try:
-        proba = model.predict_proba(X)[0][1]  # Probability of class 1
-        prediction_percent = round(proba * 100, 2)
 
         if pred_int == 1:
-            feature_importance = model.feature_importances_
-            top_features_idx = np.argsort(feature_importance)[-3:][::-1]
-            top_features = X.columns[top_features_idx].tolist()
-            top_values = X.iloc[0, top_features_idx].tolist()
-            top_factors = {feat: val for feat, val in zip(top_features, top_values)}
+            explainer = shap.TreeExplainer(model)
+            shap_values = explainer.shap_values(X)
+            # shap_values is a list: one array per class
+            shap_contribs = shap_values[0][:, 1]  
+
+            # Get top 3 absolute contributors
+            top_indices = np.argsort(np.abs(shap_contribs))[-3:][::-1]
+            top_indices = top_indices.flatten()  # Ensure it's a 1D array
+
+            top_features = [X.columns[i] for i in top_indices]
+            top_values = [float(X.iloc[0, i]) for i in top_indices]
+            top_factors = dict(zip(top_features, top_values))
+            print(f"Top factors: {top_factors}")
+
 
     except Exception as e:
-        logger.error(f"Feature importance extraction failed: {e}", exc_info=True)
+        logger.error(
+            "Feature importance extraction failed: %s", e, exc_info=True
+        )
 
     # return pd.Series(preds, name="Prediction"), top_factors, prediction_percent
     return pred_int, top_factors, pred_score

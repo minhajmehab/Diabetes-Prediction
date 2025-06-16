@@ -233,6 +233,7 @@ async function fetchAndShowHistory() {
         });
         if (!response.ok) throw new Error('Failed to fetch history');
         const data = await response.json();
+        console.log('[FetchHistory] Data:', data.extracted_data);
         renderHistoryTable(data.extracted_data);
         renderHistoryGraphs(data.extracted_data);
     } catch (err) {
@@ -258,14 +259,24 @@ function renderHistoryTable(records) {
         'diabetes_pedigree_function',
         'pregnancies',
         'score',
-        'prediction_class'
+        'prediction_class',
+        'top_factors',
     ];
     let html = '<div class="table-responsive"><table class="table table-bordered"><thead><tr>';
     headers.forEach(h => html += `<th>${h.replace(/_/g, ' ')}</th>`);
     html += '</tr></thead><tbody>';
     records.forEach(rec => {
         html += '<tr>';
-        headers.forEach(h => html += `<td>${rec[h]}</td>`);
+        headers.forEach(h => {
+            let cellValue = rec[h];
+            if (h === 'top_factors' && typeof cellValue === 'object' && cellValue !== null) {
+                // Convert object to readable string
+                cellValue = Object.entries(cellValue)
+                    .map(([k, v]) => `${k}: ${v}`)
+                    .join(', ');
+            }
+            html += `<td>${cellValue !== undefined ? cellValue : ''}</td>`;
+        });
         html += '</tr>';
     });
     html += '</tbody></table></div>';
