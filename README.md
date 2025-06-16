@@ -22,7 +22,8 @@ A full-stack web application for predicting diabetes using machine learning mode
 
 - User authentication (Firebase)
 - Upload and extract data from medical reports (PDF)
-- Diabetes prediction using classical ML and neural models
+- Diabetes prediction using classical ML
+- Model explainability with SHAP visualizations for feature importance
 - View prediction history
 - Responsive frontend dashboard
 
